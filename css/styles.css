@@ -1,0 +1,34 @@
+/*
+. => class selector
+# => id selector
+*/
+
+body {
+    background-color: #FCF9D2; 
+}
+
+div#messageEnemyLocation {
+    position: absolute;
+    color: #000000;
+}
+
+div#messagePlayerLocation {
+    position: right;
+    color: #000000;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+.noBorder {
+    border: 0px;
+}
+
+.statsProp {
+    font-weight: bold;
+}
+/*
+.column {
+    width: 50%;
+}*/
