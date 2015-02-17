@@ -6,6 +6,7 @@ function enemyStats() {
     enemyBaseHp();
     enemyStrength();
     enemyDefence();
+    enemyDamage();
 }
 
 function enemyName() {
@@ -36,6 +37,10 @@ function enemyDefence() {
     var enemyDefence = document.getElementById("enemyDefence").innerHTML = enemy.defence;
 }
 
+ function enemyDamage() {
+        var enemyDamage = document.getElementById("enemyDamage").innerHTML = enemy.damage;
+    }
+
 //Remove enemy stats
 function enemyStatsRemove() {
     document.getElementById("enemyName").innerHTML = "Enemy";
@@ -45,4 +50,5 @@ function enemyStatsRemove() {
     document.getElementById("enemyBaseHp").innerHTML = "";
     document.getElementById("enemyStrength").innerHTML = "";
     document.getElementById("enemyDefence").innerHTML = "";
+    document.getElementById("enemyDamage").innerHTML = "";
 }

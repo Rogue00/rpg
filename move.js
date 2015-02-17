@@ -1,28 +1,35 @@
 //--=== TO DO ===--
-//1. Show damage on the page;
-//2. Turn base attack;
-//3. Implement spells (input field);
 //4. Better attack formula;
 //5. Better defence formula;
 //6. Save player detals in database;
-//7. Implement images for spell and events by clicing on them;
 //8. Implement spell reuse timer and changing images (v0.1 two different images: a)usable; b) not usable );
-//9. Move project to gitHub
-//10. Rewrite Enemy Object
+//9. Rewrite Enemy Object to Constructors;
+//Generate random damage for each attck
+//Implement who will attack first (sprite with higher speed will attack first)
+//Make sure that enemy doesn't appear in the same location as player
 
 //--=== Done ===--
 //1. 08/02/2015 - Fixed enemy random location function => random location could only be generated once;
-//2. 10/02/2015 - Implemented moving with keyboard events
-;
+//2. 10/02/2015 - Implemented moving with keyboard events;
+//3. 14/02/2015 - RPG project moved to GitHub (https://github.com/github2014/rpg);
+//4. 14/02/2015 - Damage is shown in the page;
+//5. 14/02/2015 - Implemented turn based attacks;
+//6. 14/02/0215 - Implemented spells (input field);
+//7. 16/02/2015 - Implemented images for spell and events by clicking on them;
+
 
 var player = {
     name: 'JavaTar',
     level: 1,
     xp: 0,
+    nextLevel: 10,
 	hp: 20,
 	baseHp: 20,
     strength: 5,
+    intelligence: 3,
     defence: 3,
+    damage: 0,
+    magicDamage: 0,
 	locationX: 2,
     locationY: -1
 };
@@ -35,6 +42,7 @@ var enemy = {
     baseHp: 15,
     strength: 3,
     defence: 1,
+    damage: 0,
     locationX: 0,
     locationY: 0
 }   
@@ -60,32 +68,18 @@ function generateEnemyLocation() {
 generateEnemyLocation();
 
 function init() {
-    //enemyStats();
     playerStats();
+    playerStatsRemove();
     messagePlayerLocation();
     messageEnemyLocation();
-    
-    //Handle Submit button input
-    var submitButton = document.getElementById("submitButton");
-    submitButton.onclick = handleSubmitButton;
 }
 
-//Handle Submit button input
-function handleSubmitButton() {
-    var userInput = document.getElementById("userInput");
-    var userInput2 = userInput.value;
-    
-    userInput.value = "";
-    //Pass user input to a function
-    //move(userInput2);
-}
-
-function messagePlayerLocation () {
+function messagePlayerLocation() {
     var messagePlayerLocation = document.getElementById("messagePlayerLocation");
     messagePlayerLocation.innerHTML = ("Player Location: " + player.locationX + "|" + player.locationY);
 }
 
-function messageEnemyLocation () {
+function messageEnemyLocation() {
     var messageEnemyLocation = document.getElementById("messageEnemyLocation");
     messageEnemyLocation.innerHTML = ("Enemy Location: " + enemy.locationX + "|" + enemy.locationY); 
 }
@@ -94,21 +88,15 @@ function move(e){
 	if (e.keyCode === 38) {
 		player.locationY++;
         collision();
-        
 	} else if (e.keyCode ===40) {
 		player.locationY--;	
         collision();
-        
 	} else if (e.keyCode === 37) {
 		player.locationX--;
         collision();
-        
 	} else if (e.keyCode === 39) {
 		player.locationX++;
-        collision();
-        
-	} else {
-        alert("You trying to reach another dimention. Please stay in this Universe.");
+        collision(); 
 	}
 }
 
@@ -116,50 +104,80 @@ function collision() {
 	messagePlayerLocation();
     
     if(player.locationX === enemy.locationX && player.locationY === enemy.locationY) {
+        document.getElementById("submitButton").style.visibility = "visible";
         fight();
     }
 }
 
 function fight() {   
-    var playerDamage = Math.floor(Math.random() * player.strength +1),
-        enemyDamage = Math.floor(Math.random() * enemy.strength +1);
     
-    console.log("Player damage (fight): " + playerDamage);
-    console.log("Enemy damage: (fight): " + enemyDamage);
+    player.damage = Math.floor(Math.random() * player.strength +1);
+    player.magicDamage = Math.floor(Math.random() * 7);
+    enemy.damage = Math.floor(Math.random() * enemy.strength +1);
+    
+    playerStats();
+    enemyStats();
     
     
-    while((player.baseHp > 0) || (enemy.baseHp > 0)) {
-        player.baseHp = player.baseHp - enemyDamage;
-        enemy.baseHp = enemy.baseHp - playerDamage;
-        
-        console.log("Player HP: " + player.baseHp);
-        console.log("Enemy HP: " + enemy.baseHp);
-        
+    
+    //Handle Submit button input
+    var submitButton = document.getElementById("submitButton");
+    submitButton.onclick = handleSubmitButton;
+    
+    function handleSubmitButton() {
+        var userInput = document.getElementById("userInput");
+        var userInput2 = userInput.value;
+    
+        userInput.value = "";
+        //Pass user input to a function
+        turn(userInput2);
+    }
+
+    function turn(en) {
+        if (en === 'a') {
+            player.baseHp = player.baseHp - enemy.damage;
+            enemy.baseHp = enemy.baseHp - player.damage;
+            
+            att();
+        } else if (en === 's') {
+            player.baseHp = player.baseHp - enemy.damage;
+            enemy.baseHp = enemy.baseHp - player.magicDamage;
+            
+            att();
+        } else {
+            console.log("Ivalid attack!");
+        }   
+    }   
+}
+
+function att() {
+    if((player.baseHp > 0) || (enemy.baseHp > 0)){                              
+        playerStats();
+        enemyStats();
+    
         if(player.baseHp <= 0) {
             enemyStats();
             playerStats();
-            alert(player.name + "Your quest is over!");
-            break;
+            document.getElementById("submitButton").style.visibility = "hidden";
+            alert(player.name + " your quest is over!");
         } else if(enemy.baseHp <= 0) {
             enemyStats();
             playerStats();
             enemyDead();
-
-            console.log("Player XP (fight): " + player.xp);
-            console.log("Enemy baseHp (fight): " + enemy.baseHp);
-            break;
-        } 
+                        
+            document.getElementById("submitButton").style.visibility = "hidden";
+        }
     } 
 }
 
 function levelUp() {
-    if(player.xp >= nextLvl) {
+    if(player.xp >= player.nextLevel) {
         player.level++;
         player.baseHp = player.hp;
         
-        nextLvl = player.level * nextLvl;
-        console.log("Next level (levelUp): " + nextLvl);
+        player.nextLevel = player.level * player.nextLevel;
         playerStats();
+        playerStatsRemove();
         alert(player.name + " you reached level " + player.level);
     } else {
         init();
@@ -176,7 +194,19 @@ function enemyDead() {
     levelUp(); 
 }
 
-
-
-
+function spellAttack() {
+    var dmg;
+    
+    if(spells.damage > 0) {
+        dmg = player.intelligence + spells.damage;
+    } else {
+        dmg = 0;
+    }
+    
+    player.baseHp = player.baseHp - enemy.damage + spells.heal;
+    enemy.baseHp = enemy.baseHp - dmg;
+    
+    console.log("NAME: " + spells.name + " DAMAGE: " + spells.damage + " HEAL: " + spells.heal);
+    att();
+}
 

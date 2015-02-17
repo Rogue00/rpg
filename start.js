@@ -1,6 +1,6 @@
+window.onload = start;
+
 function start() {
     init();
-    playerStats();
+    spellLaunch();
 }
-
-window.onload = start;

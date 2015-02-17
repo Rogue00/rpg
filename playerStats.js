@@ -6,6 +6,7 @@ function playerStats() {
     playerBaseHp();
     playerStrength();
     playerDefence();
+    playerDamage();
 }
 
 
@@ -18,7 +19,7 @@ function playerLevel() {
 }
 
 function playerXp() {
-    var playerXp = document.getElementById("playerXp").innerHTML = player.xp;
+    var playerXp = document.getElementById("playerXp").innerHTML = player.xp + " / " + player.nextLevel;
 }
 
 function playerHp() {
@@ -35,4 +36,13 @@ function playerStrength() {
 
 function playerDefence() {
     var playerDefence = document.getElementById("playerDefence").innerHTML = player.defence;
+}
+
+ function playerDamage() {
+        var playerDamage = document.getElementById("playerDamage").innerHTML = player.damage + " / " + player.magicDamage;
+ }
+
+//Remove player stats
+function playerStatsRemove() {
+    document.getElementById("playerDamage").innerHTML = "";
 }

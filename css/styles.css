@@ -7,6 +7,10 @@ body {
     background-color: #FCF9D2; 
 }
 
+input#submitButton {
+    visibility: hidden;
+}
+
 div#messageEnemyLocation {
     position: absolute;
     color: #000000;
@@ -27,6 +31,20 @@ table, th, td{
 
 .statsProp {
     font-weight: bold;
+}
+
+.spell {
+    width: 64px;
+    height: 64px;
+}
+
+.spellLaunch {
+    border: 0px solid black;
+    padding: 5px;
+}
+
+table#spellLaunchTable {
+    border: 0px solid black;
 }
 /*
 .column {
