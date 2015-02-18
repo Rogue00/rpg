@@ -7,6 +7,7 @@
 //Generate random damage for each attck
 //Implement who will attack first (sprite with higher speed will attack first)
 //Make sure that enemy doesn't appear in the same location as player
+//One function to get spellId
 
 //--=== Done ===--
 //1. 08/02/2015 - Fixed enemy random location function => random location could only be generated once;
@@ -16,6 +17,7 @@
 //5. 14/02/2015 - Implemented turn based attacks;
 //6. 14/02/0215 - Implemented spells (input field);
 //7. 16/02/2015 - Implemented images for spell and events by clicking on them;
+//8. 17/02/2015 - Implemented Spell.prototype (all spell instances will inherit from same prototype)
 
 
 var player = {
