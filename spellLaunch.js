@@ -24,23 +24,15 @@ var spells = {
     heal: 0
 }
 
-var elements = document.getElementsByClassName('boxes');
-for(var i=0, l=elements.length; i<l; i++){
- elements[i].style.backgroundColor = "green";
-}
-
-//document.getElementById("fireBall").addEventListener("click", fireBall.fire.bind(fireBall));
-
-
-function getSpell(className, event, fn){
+//picks all the ids that belongs to selected class
+function getSpell(className, event){
     var spellArray = document.getElementsByClassName(className);
     
     for(var i = 0; i < spellArray.length; i++){
-        spellArray[i].addEventListener(event, fn)
-        console.log("ASSAS");
+        var ids = window[spellArray[i].getAttribute("id")];
+        spellArray[i].addEventListener(event, ids.fire.bind(ids))
     }
 }
-
 
 /*
 var ids = [];
