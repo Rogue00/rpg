@@ -8,72 +8,96 @@
         <script src="enemyStats.js"></script>
         <script src="start.js"></script>
         <script src="spellLaunch.js"></script>
-	<title>Adventure game v0.1 </title>
+        <script src="weapons.js"></script>
+        <script src="armors.js"></script>
+        <script src="items.js"></script>
+        <script src="inventory.js"></script>
+	<title>Adventure game v0.1</title>
 	</head>
 	<body>
-        <form>
-            <input type="text" id="userInput">
-            <input type="button" id="submitButton" value="Go">
-        </form>
-        <br>
-        <div id="messagePlayerLocation"></div>
-        <br>
-        <div id="messageEnemyLocation"></div>
-        <br>
-        <br>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="noBorder"></td>
-                    <td id="playerName" class="statsProp">Player</td>
-                    <td id="enemyName" class="statsProp">Enemy</td>
-                </tr>
-                <tr>
-                    <td class="statsProp">Level</td>
-                    <td id="playerLevel" class="column"></td>
-                    <td id="enemyLevel" class="column"></td>
-                </tr>
-                <tr>
-                    <td class="statsProp">XP</td>
-                    <td id="playerXp" class="column"></td>
-                    <td id="enemyXp" class="column"></td>
-                </tr>
-                <tr>
-                    <td class="statsProp">HP</td>
-                    <td id="playerHp" class="column"></td>
-                    <td id="enemyHp" class="column"></td>
-                </tr>
-                <tr>
-                    <td class="statsProp">Remaining HP</td>
-                    <td id="playerBaseHp" class="column"></td>
-                    <td id="enemyBaseHp" class="column"></td>
-                </tr>
-                <tr>
-                    <td class="statsProp">Strength</td>
-                    <td id="playerStrength" class="column"></td>
-                    <td id="enemyStrength" class="column"></td>
-                </tr>
-                <tr>
-                    <td class="statsProp">Defence</td>
-                    <td id="playerDefence" class="column"></td>
-                    <td id="enemyDefence" class="column"></td>
-                </tr>
-                 <tr>
-                    <td class="statsProp">Damage</td>
-                    <td id="playerDamage" class="column"></td>
-                    <td id="enemyDamage" class="column"></td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <table id='spellLaunchTable'>
-            <tbody>
-                 <tr>
-                    <td class="spellLaunch"><img id="fireBall" class="spell" src="images/Spell_firebolt.png" alt="Fire Ball"></td>
-                    <td class="spellLaunch"><img id="lifeDrain" class="spell" src="images/Spell_lifedrain.png" alt="Life Drain"></td>
-                     <td class="spellLaunch"><img id="holyHeal" class="spell" src="images/Spell_holyheal.png" alt="Holy Heal"></td>
-                </tr>
-            </tbody>
-        </table>
+        <section id="section-left">
+            <form>
+                <input type="text" id="userInput">
+                <input type="button" id="submitButton" value="Go">
+            </form>
+            <br>
+            <div id="messagePlayerLocation"></div>
+            <br>
+            <div id="messageEnemyLocation"></div>
+            <br>
+            <br>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="noBorder"></td>
+                        <td id="playerName" class="statsProp">Player</td>
+                        <td id="enemyName" class="statsProp">Enemy</td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">Level</td>
+                        <td id="playerLevel" class="column"></td>
+                        <td id="enemyLevel" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">XP</td>
+                        <td id="playerXp" class="column"></td>
+                        <td id="enemyXp" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">HP</td>
+                        <td id="playerHp" class="column"></td>
+                        <td id="enemyHp" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">Remaining HP</td>
+                        <td id="playerBaseHp" class="column"></td>
+                        <td id="enemyBaseHp" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">Strength</td>
+                        <td id="playerStrength" class="column"></td>
+                        <td id="enemyStrength" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">Defence</td>
+                        <td id="playerDefence" class="column"></td>
+                        <td id="enemyDefence" class="column"></td>
+                    </tr>
+                    <tr>
+                        <td class="statsProp">Damage</td>
+                        <td id="playerDamage" class="column"></td>
+                        <td id="enemyDamage" class="column"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table id='spellLaunchTable'>
+                <tbody>
+                    <tr>
+                        <td class="spellLaunch"><img id="fireBall" class="spell" src="images/Spell_firebolt.png" alt="Fire Ball"></td>
+                        <td class="spellLaunch"><img id="lifeDrain" class="spell" src="images/Spell_lifedrain.png" alt="Life Drain"></td>
+                        <td class="spellLaunch"><img id="holyHeal" class="spell" src="images/Spell_holyheal.png" alt="Holy Heal"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="section-center">
+            <table class="top-stats-table">
+                <tbody>
+                    <tr>
+                        <td class="top-stats-table"><img class="top-stats" src="images/gold.png" alt="Gold"></td>
+                        <td id="top-stats-gold" class="top-stats-table"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="section-right">
+            <table id="table-inventory">
+                <tbody>
+                    <tr id="tr-inventory">
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 	</body>
 </html>

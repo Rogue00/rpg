@@ -5,6 +5,5 @@ document.onkeydown = function keyboardEvent(event) {
     
     //console.log("Key Pressed: " + key_press);
     //console.log("Key Code: " + key_code);
-    
     move(event);
 }

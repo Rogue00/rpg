@@ -7,6 +7,17 @@
 //Generate random damage for each attck
 //Implement who will attack first (sprite with higher speed will attack first)
 //Make sure that enemy doesn't appear in the same location as player
+//Implement random item location
+//Implement enemy drops
+//Implement images for enemies
+//Implement images for drops
+//Implement player wears
+//Spells using Mana
+//Clean move.js
+//Use items from Invetory
+//Equipt item from inventiry
+//Swap wearable item
+
 
 //--=== Done ===--
 //1. 08/02/2015 - Fixed enemy random location function => random location could only be generated once;
@@ -18,7 +29,12 @@
 //7. 16/02/2015 - Implemented images for spell and events by clicking on them;
 //8. 17/02/2015 - Implemented Spell.prototype (all spell instances will inherit from same prototype)
 //9. 17/02/2015 - Implemented one function to get all spell ids 
-
+//10. 21/02/2015 - Inventory created + adding items to inventory
+//11. 21/02/2015 - Items created
+//12. 23/02/2015 - Implemented check if inventory is full
+//13. 24/02/2015 - Show invetory in the page
+//14. 24/02/2015 - Implemented images for items
+//15. 01/03/2015 - index.html shows Invetory and Items
 
 var player = {
     name: 'JavaTar',
@@ -32,6 +48,9 @@ var player = {
     defence: 3,
     damage: 0,
     magicDamage: 0,
+    inventory: [],
+    inventorySize: 5,
+    gold: 1111,
 	locationX: 2,
     locationY: -1
 };
@@ -112,15 +131,12 @@ function collision() {
 }
 
 function fight() {   
-    
     player.damage = Math.floor(Math.random() * player.strength +1);
     player.magicDamage = Math.floor(Math.random() * 7);
     enemy.damage = Math.floor(Math.random() * enemy.strength +1);
     
     playerStats();
     enemyStats();
-    
-    
     
     //Handle Submit button input
     var submitButton = document.getElementById("submitButton");
@@ -139,12 +155,10 @@ function fight() {
         if (en === 'a') {
             player.baseHp = player.baseHp - enemy.damage;
             enemy.baseHp = enemy.baseHp - player.damage;
-            
             att();
         } else if (en === 's') {
             player.baseHp = player.baseHp - enemy.damage;
             enemy.baseHp = enemy.baseHp - player.magicDamage;
-            
             att();
         } else {
             console.log("Ivalid attack!");
@@ -165,8 +179,7 @@ function att() {
         } else if(enemy.baseHp <= 0) {
             enemyStats();
             playerStats();
-            enemyDead();
-                        
+            enemyDead();            
             document.getElementById("submitButton").style.visibility = "hidden";
         }
     } 
@@ -176,7 +189,6 @@ function levelUp() {
     if(player.xp >= player.nextLevel) {
         player.level++;
         player.baseHp = player.hp;
-        
         player.nextLevel = player.level * player.nextLevel;
         playerStats();
         playerStatsRemove();

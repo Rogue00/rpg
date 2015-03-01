@@ -7,6 +7,7 @@ function playerStats() {
     playerStrength();
     playerDefence();
     playerDamage();
+    playerGold();
 }
 
 
@@ -41,6 +42,10 @@ function playerDefence() {
  function playerDamage() {
         var playerDamage = document.getElementById("playerDamage").innerHTML = player.damage + " / " + player.magicDamage;
  }
+
+function playerGold() {
+    var playerGold = document.getElementById("top-stats-gold").innerHTML = player.gold;
+}
 
 //Remove player stats
 function playerStatsRemove() {

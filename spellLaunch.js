@@ -1,10 +1,4 @@
-function spellLaunch() {
-    //fireBallSpell();
-    //lifeDrainSpell();
-    //holyHealSpell();
-}
-
-function Spell(name, damage, heal){
+function Spell(name, damage, heal) {
     this.name = name;
     this.damage = damage;
     this.heal = heal;
@@ -24,6 +18,10 @@ var spells = {
     heal: 0
 }
 
+var fireBall = new Spell('Fire Ball', 5, 0);
+var lifeDrain = new Spell('Life Drain', 2, 0);
+var holyHeal = new Spell('Holy Heal', 0, 5);
+
 //picks all the ids that belongs to selected class
 function getSpell(className, event){
     var spellArray = document.getElementsByClassName(className);
@@ -33,46 +31,3 @@ function getSpell(className, event){
         spellArray[i].addEventListener(event, ids.fire.bind(ids))
     }
 }
-
-/*
-var ids = [];
-function getSpell(){
-    //var ids = [];
-    
-    var spellArray = document.getElementsByClassName("spell");
-    
-    for(var i = 0; i < spellArray.length; i++){
-        //console.log(spellArray[i]);
-        //getAttribute() gets atributes value
-        ids[i] = spellArray[i].getAttribute("id");
-        console.log("ATTRIBUTE ID: " + ids);
-        //spellArray[i].addEventListener("click", function(){console.log("dsa" + ids[i])});//ids[2].fire.bind(ids[2]));
-        
-        /*
-        var clicking = spellArray[i].addEventListener("click", function(){
-                                                                    console.log("SAY WHAT??!!!?: " + ids[2]);
-                                                                })*/
-    //}
-//}
-
-var fireBall = new Spell('Fire Ball', 5, 0);
-var lifeDrain = new Spell('Life Drain', 2, 0);
-var holyHeal = new Spell('Holy Heal', 0, 5);
-
-/*
-function fireBallSpell() {
-    var fireBall = new Spell('Fire Ball', 5, 0);
-    //using function.bind 
-    document.getElementById("fireBall").addEventListener("click", fireBall.fire.bind(fireBall));
-}
-
-function lifeDrainSpell() {
-    var lifeDrain = new Spell('Life Drain', 2, 0);
-    document.getElementById("lifeDrain").addEventListener("click", lifeDrain.fire.bind(lifeDrain));
-}
-
-function holyHealSpell() {
-    var holyHeal = new Spell('Holy Heal', 0, 5);
-    document.getElementById("holyHeal").addEventListener("click", holyHeal.fire.bind(holyHeal));
-}
-*/

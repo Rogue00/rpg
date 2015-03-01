@@ -46,7 +46,30 @@ table, th, td{
 table#spellLaunchTable {
     border: 0px solid black;
 }
-/*
-.column {
-    width: 50%;
-}*/
+
+section#section-left {
+    width: 300px;
+    float:left;
+    padding:10px;
+}
+
+section#section-center {
+    width: 300px;
+    float:left;
+    padding:10px;
+}
+
+section#section-right {
+    width: 600px;
+    float:left;
+    padding:10px;
+}
+
+img.top-stats {
+    width: 21px;
+    height: 21px;
+}
+
+table.top-stats-table, th.top-stats-table, td.top-stats-table{
+    border: 0px solid black;
+}
