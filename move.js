@@ -11,12 +11,12 @@
 //Implement enemy drops
 //Implement images for enemies
 //Implement images for drops
-//Implement player wears
 //Spells using Mana
 //Clean move.js
+//Swap wearable item
+//Implement player wears
 //Use items from Invetory
 //Equipt item from inventiry
-//Swap wearable item
 
 
 //--=== Done ===--
@@ -35,6 +35,7 @@
 //13. 24/02/2015 - Show invetory in the page
 //14. 24/02/2015 - Implemented images for items
 //15. 01/03/2015 - index.html shows Invetory and Items
+//16. 11/03/2015 - show icon for empty slots
 
 var player = {
     name: 'JavaTar',
@@ -54,6 +55,15 @@ var player = {
 	locationX: 2,
     locationY: -1
 };
+
+var playerWearables = {
+    head: '',
+    mainHand: '',
+    secondaryHand: '',
+    chest: '',
+    legs: '',
+    feet: ''
+}
 
 var enemy = {
     name: 'Troll',

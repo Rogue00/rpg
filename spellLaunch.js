@@ -23,11 +23,10 @@ var lifeDrain = new Spell('Life Drain', 2, 0);
 var holyHeal = new Spell('Holy Heal', 0, 5);
 
 //picks all the ids that belongs to selected class
-function getSpell(className, event){
+function getSpell(className, event) {
     var spellArray = document.getElementsByClassName(className);
-    
-    for(var i = 0; i < spellArray.length; i++){
+    for(var i = 0; i < spellArray.length; i++) {
         var ids = window[spellArray[i].getAttribute("id")];
-        spellArray[i].addEventListener(event, ids.fire.bind(ids))
+        spellArray[i].addEventListener(event, ids.fire.bind(ids));
     }
 }

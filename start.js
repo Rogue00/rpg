@@ -4,4 +4,5 @@ function start() {
     init();
     drawInventory(player.inventory, player.inventorySize);
     getSpell("spell", "click");
+    equipItem("inventoryItem", "click");
 }
