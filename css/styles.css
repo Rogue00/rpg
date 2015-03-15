@@ -54,13 +54,13 @@ section#section-left {
 }
 
 section#section-center {
-    width: 300px;
+    width: 400px;
     float:left;
     padding:10px;
 }
 
 section#section-right {
-    width: 600px;
+    width: 500px;
     float:left;
     padding:10px;
 }

@@ -39,19 +39,24 @@ var pickedItem = {
     image: ''
 }
 
-function attackItem(name, image, value) {
+function attackItem(name, image, value, className, strengthBoost) {
     Item.call(this, name, image);
     this.value = value;
+    this.className = className;
+    this.strengthBoost = strengthBoost;
 }
 
-function defenceItem(name, image, defence) {
+function defenceItem(name, image, defence, className, defenceBoost) {
     Item.call(this, name, image);
     this.defence = defence;
+    this.className = className;
+    this.defenceBoost = defenceBoost;
 }
 
-function goldItem(name, image, value) {
+function goldItem(name, image, value, className) {
     Item.call(this, name, image);
     this.value = value;
+    this.className = className;
 }
 
 attackItem.prototype = new Item();
@@ -63,11 +68,9 @@ attackItem.prototype.constructor = attackItem;
 defenceItem.prototype .constructor = defenceItem;
 goldItem.prototype.constructor = goldItem;
 
-//var shortSword = new attackItem("Short Sword", "attack_shortSword.png", 3);
-//var letherArmor = new defenceItem("Lether Armor","defence_letherArmor.png", 2);
-var shortSword = new attackItem(shortSword.id, shortSword.image, shortSword.value);
-var letherArmor = new defenceItem(leatherArmor.id, leatherArmor.image, leatherArmor.defence);
-var gold = new goldItem(gold.id, gold.image, gold.value); 
+var shortSword = new attackItem(shortSword.id, shortSword.image, shortSword.value, shortSword.className, shortSword.strengthBoost);
+var letherArmor = new defenceItem(leatherArmor.id, leatherArmor.image, leatherArmor.defence, leatherArmor.className, leatherArmor.defenceBoost);
+var gold = new goldItem(gold.id, gold.image, gold.value, gold.className); 
 
 letherArmor.pickItem();
 shortSword.pickItem();

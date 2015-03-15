@@ -32,11 +32,11 @@ function playerBaseHp() {
 }
 
 function playerStrength() {
-    var playerStrength = document.getElementById("playerStrength").innerHTML = player.strength;
+    var playerStrength = document.getElementById("playerStrength").innerHTML = player.strength + ' + ' + playerWearables.strengthBoost;
 }
 
 function playerDefence() {
-    var playerDefence = document.getElementById("playerDefence").innerHTML = player.defence;
+    var playerDefence = document.getElementById("playerDefence").innerHTML = player.defence + ' + ' + playerWearables.defenceBoost;
 }
 
  function playerDamage() {

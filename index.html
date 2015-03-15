@@ -13,6 +13,7 @@
         <script src="items.js"></script>
         <script src="inventory.js"></script>
         <script src="equipItems.js"></script>
+        <script src="map.js"></script>
 	<title>Adventure game v0.1</title>
 	</head>
 	<body>
@@ -91,13 +92,16 @@
                     </tr>
                 </tbody>
             </table>
+    
+            <canvas id="canvasMap" height="200px" width="300px"></canvas>
+            
         </section>
         <section id="section-right">
             <table id="table-playerWearables">
                 <tbody>
                     <tr>
                         <td></td>
-                        <td><img class="" src="images/emptySlots/emptySlots-Helmet.png" alt="Head"></td>
+                        <td><img class="playerWearables helmet" src="images/emptySlots/emptySlots-Helmet.png" alt="Head"></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -106,18 +110,18 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td ><img class="" id="playerWearables-mainHand" src="images/emptySlots/emptySlots-mainHand.png" alt="Main Hand"></td>
-                        <td><img class="" id="playerWearables-chest" src="images/emptySlots/emptySlots-chest.png" alt="Chest"></td>
-                        <td><img class="" src="images/emptySlots/emptySlots-mainHand.png" alt="Secondary Hand"></td>
+                        <td ><img class="playerWearables mainHand" id="playerWearables-mainHand" src="images/emptySlots/emptySlots-mainHand.png" alt="Main Hand"></td>
+                        <td><img class="playerWearables chest" id="playerWearables-chest" src="images/emptySlots/emptySlots-chest.png" alt="Chest"></td>
+                        <td><img class="playerWearables secondaryHand" src="images/emptySlots/emptySlots-mainHand.png" alt="Secondary Hand"></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><img class="" src="images/emptySlots/emptySlots-legs.png" alt="Legs"></td>
+                        <td><img class="playerWearables legs" src="images/emptySlots/emptySlots-legs.png" alt="Legs"></td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><img class="" src="images/emptySlots/emptySlots-feet.png" alt="Feet"></td>
+                        <td><img class="playerWearables feet" src="images/emptySlots/emptySlots-feet.png" alt="Feet"></td>
                         <td></td>
                     </tr>
                 </tbody>
