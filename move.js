@@ -10,11 +10,12 @@ var player = {
     defence: 3,
     damage: 0,
     magicDamage: 0,
+    speed: 100,
     inventory: [],
     inventorySize: 5,
     gold: 1111,
-	locationX: 30,
-    locationY: 30
+	locationX: 128,
+    locationY: 64
 };
 
 var playerWearables = {
@@ -50,12 +51,12 @@ var enemy = {
 var nextLvl = 10;
 
 function generateEnemyLocationX() {
-    enemy.locationX = Math.floor(Math.random() * 10 * 15);
+    enemy.locationX = Math.floor(Math.random() * 11) * 32;
     return enemy.locationX; 
 }
 
 function generateEnemyLocationY() {
-    enemy.locationY = Math.floor(Math.random() * 10 * 15);
+    enemy.locationY = Math.floor(Math.random() * 11) * 32;
     return enemy.locationY; 
 }
 
@@ -84,30 +85,68 @@ function messageEnemyLocation() {
     messageEnemyLocation.innerHTML = ("Enemy Location: " + enemy.locationX + "|" + enemy.locationY); 
 }
 
-function move(e){
-	if (e.keyCode === 40) {
-		player.locationY++;
-        drawMap();
+
+//Handle keyboard cntrols
+//If a key code is in the object, the user is currently pressing that key
+var keysDown = {};
+
+addEventListener("keydown", function(e) {
+    keysDown[e.keyCode] = true;
+}, false);
+
+addEventListener("keyup", function(e) {
+    delete keysDown[e.keyCode];
+}, false);
+
+
+// Update game objects
+var update = function (modifier) {
+	if (38 in keysDown) { // Player holding up
+		player.locationY -= player.speed * modifier;
+        render();
         collision();
-	} else if (e.keyCode ===38) {
-		player.locationY--;	
-        drawMap();
-        collision();
-	} else if (e.keyCode === 37) {
-		player.locationX--;
-        drawMap();
-        collision();
-	} else if (e.keyCode === 39) {
-		player.locationX++;
-        drawMap();
-        collision(); 
 	}
+	if (40 in keysDown) { // Player holding down
+		player.locationY += player.speed * modifier;
+        render();
+        collision();
+	}
+	if (37 in keysDown) { // Player holding left
+		player.locationX -= player.speed * modifier;
+        render();
+        collision();
+	}
+	if (39 in keysDown) { // Player holding right
+		player.locationX += player.speed * modifier;
+        render();
+        collision();
+	}
+
+};
+
+var then = Date.now();
+
+var main = function() {
+
+    var now = Date.now();
+    var delta = now - then;
+    
+    update(delta/1000);
+    messagePlayerLocation();
+    //console.log("DELTA: " + delta);
+    
+    then = now;
+    
+    requestAnimationFrame(main);
 }
 
 function collision() {
-	messagePlayerLocation();
-    
-    if((player.locationX - 17) === enemy.locationX || (player.locationY - 17) === enemy.locationY) {
+    if(
+        player.locationX <= (enemy.locationX + 32)
+        && enemy.locationX <= (player.locationX + 32)
+        && player.locationY <= (enemy.locationY + 32)
+        && enemy.locationY <= (player.locationY + 32)
+    ) {
         document.getElementById("submitButton").style.visibility = "visible";
         fight();
     }
@@ -185,7 +224,7 @@ function enemyDead() {
     alert(enemy.name + " is killed.");
     player.xp = player.xp + enemy.xp;
     generateEnemyLocation();
-    drawMap();
+    render();
     enemy.baseHp = enemy.hp;
     enemyStatsRemove();
     messageEnemyLocation();

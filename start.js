@@ -6,5 +6,6 @@ function start() {
     getSpell("spell", "click");
     equipItem("inventoryItem", "click");
     removeWearable("playerWearables", "click");
-    drawMap();
+    render();
+    main();
 }

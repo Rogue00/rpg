@@ -19,7 +19,10 @@
 //Equipping wearable from inventiry
 //Equiptment - only start event listener when wearable is worn
 //Check is same item is allready worn
-//BUG: Canvas - check when all images are loaded (onload)
+//Map - BUG: Canvas - check when all images are loaded (onload)
+//Fix enemy coalitions
+// Map - Add obsticals
+// Map - Add items
 
 
 #--=== Done ===--
@@ -46,7 +49,16 @@
 21. 15/03/2015 - Inventory - refreshed when wearables are removed; 
 22. 15/03/2015 - Inventory - item is removed/added to inventory when player equipts/unequips wearables; 
 23. 15/03/2015 - Map - canvas map created;
-24. 15/03/2015 - Map - player movement
+24. 15/03/2015 - Map - player movement;
+25. 30/03/2015 - Move - changed keyboardEventListener;
+26. 30/03/2015 - Move - introduced player speed;
+27. 30/03/2015 - Move - player moves in pixels/second not every 32 pixels;
+28. 30/03/2015 - Attack - updated collision() function - don't need to step on enemy anymore; 
+29. 30/03/2015 - Map - updated how canvas is drawn;
+
 
 #--=== Working now ===--
+16/03/2015
+//Create an enemy array for canvas map (http://www.youtube.com/watch?v=rqEJ7WiLWdo)
+//scan the map and add obstacles to the array (BUG: same obstacle is added to the array each time when player moves - map is drawn). SOLUTION: seperate map update from full map draw.
 

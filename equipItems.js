@@ -13,6 +13,7 @@ function checkItem() {
         playerInventory.splice(itemToRemoveIndex, 1);
         
         playerWearables.chest = itemTest.id;
+        //add a boost to stats
         playerWearables.defenceBoost = window[itemTest.id].defenceBoost;
         console.log("DEFENCE BOOST: " + window[itemTest.id].defenceBoost);
         playerStats();
@@ -22,7 +23,7 @@ function checkItem() {
         var inventorySlot = document.getElementById(itemTest.id).src = "images/emptySlots/emptySlots-invetory.png";
         var invetoryStopEvent = document.getElementById(itemTest.id);
         
-        //removeEventListener must reference to the function object that was previously attached (in this case removeItem)
+        //removeEventListener must reference to the function against which object that was previously attached (in this case removeItem)
         invetoryStopEvent.removeEventListener("click", removeItem);
     } else if(itemTest.className == 'inventoryItem mainHand') {
         var itemToRemoveIndex = playerInventory.indexOf(itemTest.id);
