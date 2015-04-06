@@ -1,4 +1,4 @@
-var rockArray = [];
+var obstaclesArray = [];
 var tiles =[];
 
 //Create the canvas
@@ -8,17 +8,17 @@ var mapWidth = canvas.width;
 var mapHeight = canvas.height;
 
 var mapArray = [
-    [0,0,1,1,0,0,0,0,1,1,0],
-    [0,0,0,1,1,0,0,0,1,1,0],
-    [0,0,0,1,1,0,0,0,1,1,0],
-    [0,0,0,0,1,1,0,0,1,1,0],
-    [0,0,0,0,1,1,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0,1,1,0],
-    [0,0,0,0,0,2,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0,1,1,0],
-    [0,0,0,0,0,0,0,0,1,0,0]
+    [2,0,1,1,0,0,0,0,1,1,0],
+    [2,0,0,1,1,0,0,0,1,1,0],
+    [2,0,0,1,1,0,0,0,1,1,0],
+    [2,0,0,0,1,1,0,0,1,1,0],
+    [2,0,0,2,1,1,0,0,1,1,0],
+    [2,0,0,2,2,0,0,0,1,1,0],
+    [2,0,0,0,0,0,0,0,1,1,0],
+    [2,0,0,2,2,0,0,0,1,1,0],
+    [2,0,0,0,0,0,0,0,1,1,0],
+    [2,0,0,0,0,0,0,0,1,1,0],
+    [2,2,2,2,2,2,2,2,2,2,2]
 ];
 
 //Map images
@@ -59,10 +59,43 @@ trollImage.onload = function () {
 }
 trollImage.src = "images/map/troll_2.gif";
 
+//scan map and populate obstaclesArray with obstacles coordinates 
+function obstaclesArrayCreation() {
+    var posX = 0;
+    var posY = 0;
+    var obstaclesCount = 0;
+    
+    //console.log("Building Obstickles Array...");
+    for(var i = 0; i < mapArray.length; i++) {
+        for(var j = 0; j < mapArray[i].length; j++) {
+            if(mapArray[i][j] == '2') {
+                //console.log("NEW POS X: " + posX);
+                //console.log("NEW POS Y: " + posY);
+                
+                obstaclesCount++;
+                
+                for(var k = obstaclesCount - 1; k < obstaclesCount; k++) {
+                    obstaclesArray[k] = new Array();    
+                }
+
+                for(var indexX = obstaclesCount - 1; indexX < obstaclesArray.length; indexX++) {
+                    for(var indexY = 0; indexY < 1; indexY++) {
+                        obstaclesArray[indexX][indexY] = posX;
+                        obstaclesArray[indexX][indexY + 1] = posY;
+                    }
+                }
+            }
+            posX +=32;
+        }
+        posX = 0;
+        posY += 32;
+    }
+}
+
 //Draw everything
 var render = function () {
     
-    console.log("MAP IS UPDATED!!!!!!!!!!!!!!!!!!!");
+    //console.log("MAP IS UPDATED!!!!!!!!!!!!!!!!!!!");
     
     var posX = 0;
     var posY = 0;

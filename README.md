@@ -55,10 +55,13 @@
 27. 30/03/2015 - Move - player moves in pixels/second not every 32 pixels;
 28. 30/03/2015 - Attack - updated collision() function - don't need to step on enemy anymore; 
 29. 30/03/2015 - Map - updated how canvas is drawn;
+30. 04/04/2015 - Map - obstacles created and user can't move through them;
+31. 04/04/2015 - Map - user can't move through the enemy;
+32. 06/04/2015 - Map - enemy will not appear on obstacles;
 
 
 #--=== Working now ===--
 16/03/2015
-//Create an enemy array for canvas map (http://www.youtube.com/watch?v=rqEJ7WiLWdo)
-//scan the map and add obstacles to the array (BUG: same obstacle is added to the array each time when player moves - map is drawn). SOLUTION: seperate map update from full map draw.
+//?Create an enemy array for canvas map (http://www.youtube.com/watch?v=rqEJ7WiLWdo)
+
 

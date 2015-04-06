@@ -49,24 +49,31 @@ var enemy = {
 }   
 
 var nextLvl = 10;
-
-function generateEnemyLocationX() {
-    enemy.locationX = Math.floor(Math.random() * 11) * 32;
-    return enemy.locationX; 
-}
-
-function generateEnemyLocationY() {
-    enemy.locationY = Math.floor(Math.random() * 11) * 32;
-    return enemy.locationY; 
-}
+var SPRITE_SIZE = 31;
 
 function generateEnemyLocation() {
-    generateEnemyLocationX();
-    generateEnemyLocationY();
+    enemy.locationX = Math.floor(Math.random() * 11) * 32;
+    enemy.locationY = Math.floor(Math.random() * 11) * 32;
+    
+    while(obsticklesBlockedMove() == true) {//(blockedMoveX() == true && blockedMoveY() == true) {
+        enemy.locationX = Math.floor(Math.random() * 11) * 32;
+        enemy.locationY = Math.floor(Math.random() * 11) * 32;
+    }
+    render();
 }
 
-//Generate enemy location
-generateEnemyLocation();
+function obsticklesBlockedMove() {
+     for(var i = 0; i < obstaclesArray.length; i++) {
+            if(
+                enemy.locationX == (obstaclesArray[i][0])
+                && enemy.locationY == (obstaclesArray[i][1])
+            ) {
+                return true;
+                break;
+            }
+    }
+    return false;
+}     
 
 function init() {
     playerStats();
@@ -103,23 +110,39 @@ addEventListener("keyup", function(e) {
 var update = function (modifier) {
 	if (38 in keysDown) { // Player holding up
 		player.locationY -= player.speed * modifier;
-        render();
-        collision();
+        if(blockedMove() == true || collision() == true) {
+            player.locationY += player.speed * modifier;
+            render();
+        } else {
+            render();
+        }
 	}
 	if (40 in keysDown) { // Player holding down
 		player.locationY += player.speed * modifier;
-        render();
-        collision();
+        if(blockedMove() == true || collision() == true) {
+            player.locationY -= player.speed * modifier;
+            render();
+        } else {
+            render();
+        }
 	}
 	if (37 in keysDown) { // Player holding left
 		player.locationX -= player.speed * modifier;
-        render();
-        collision();
+        if(blockedMove() == true || collision() == true) {
+            player.locationX += player.speed * modifier;
+            render();
+        } else {
+            render();
+        }    
 	}
 	if (39 in keysDown) { // Player holding right
 		player.locationX += player.speed * modifier;
-        render();
-        collision();
+        if(blockedMove() == true || collision() == true) {
+            player.locationX -= player.speed * modifier;
+            render();
+        } else {
+            render();
+        }  
 	}
 
 };
@@ -149,6 +172,22 @@ function collision() {
     ) {
         document.getElementById("submitButton").style.visibility = "visible";
         fight();
+        return true;
+    }
+}
+
+function blockedMove() {
+    for(i = 0; i < obstaclesArray.length; i++) {
+        for(j = 0; j < obstaclesArray[i].length; j++) {
+            if(
+                player.locationX <= (obstaclesArray[i][j] + SPRITE_SIZE)
+                && obstaclesArray[i][j] <= (player.locationX + SPRITE_SIZE)
+                && player.locationY <= (obstaclesArray[i][j+1] + SPRITE_SIZE)
+                && obstaclesArray[i][j+1]<= (player.locationY + SPRITE_SIZE)
+            ) {
+                return true;
+            }
+        }
     }
 }
 
