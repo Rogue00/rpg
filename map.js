@@ -13,32 +13,32 @@ var mapArray = [
     [2,0,0,1,1,0,0,0,1,1,0],
     [2,0,0,0,1,1,0,0,1,1,0],
     [2,0,0,2,1,1,0,0,1,1,0],
-    [2,0,0,2,2,0,0,0,1,1,0],
-    [2,0,0,0,0,0,0,0,1,1,0],
-    [2,0,0,2,2,0,0,0,1,1,0],
-    [2,0,0,0,0,0,0,0,1,1,0],
-    [2,0,0,0,0,0,0,0,1,1,0],
+    [2,0,0,2,2,2,2,2,2,1,0],
+    [2,0,0,0,0,0,0,0,2,1,0],
+    [2,0,0,2,2,2,2,0,2,2,2],
+    [2,0,0,0,0,0,2,0,2,1,2],
+    [2,0,0,0,0,0,2,0,1,1,2],
     [2,2,2,2,2,2,2,2,2,2,2]
 ];
 
 //Map images
 var grassReady = false;
 var grassImage = new Image();
-grassImage.onload = function () {
+grassImage.onload = function() {
     grassReady = true;
 };
 grassImage.src = "images/map/grass.gif";
 
 var sandReady = false;
 var sandImage = new Image();
-sandImage.onload = function () {
+sandImage.onload = function() {
     sandReady = true;
 };
 sandImage.src = "images/map/sand.gif";
 
 var rockReady = false;
 var rockImage = new Image();
-rockImage.onload = function () {
+rockImage.onload = function() {
     rockReady = true;
 }
 rockImage.src = "images/map/rock.gif";
@@ -46,7 +46,7 @@ rockImage.src = "images/map/rock.gif";
 //Player image
 var playerReady = false;
 var playerImage = new Image();
-playerImage.onload = function (){
+playerImage.onload = function(){
     playerReady = true;
 };
 playerImage.src = "images/map/player.png";
@@ -54,10 +54,17 @@ playerImage.src = "images/map/player.png";
 //Enemy images
 var trollReady = false;
 var trollImage = new Image();
-trollImage.onload = function () {
+trollImage.onload = function() {
     trollReady = true;
-}
+};
 trollImage.src = "images/map/troll_2.gif";
+
+var redDragonReady = false;
+var redDragonImage = new Image();
+redDragonImage.onload = function() {
+    redDragonReady = true;
+};
+redDragonImage.src = "images/map/enemyRedDragon_orgiginal.gif";
 
 //scan map and populate obstaclesArray with obstacles coordinates 
 function obstaclesArrayCreation() {
@@ -65,13 +72,9 @@ function obstaclesArrayCreation() {
     var posY = 0;
     var obstaclesCount = 0;
     
-    //console.log("Building Obstickles Array...");
     for(var i = 0; i < mapArray.length; i++) {
         for(var j = 0; j < mapArray[i].length; j++) {
             if(mapArray[i][j] == '2') {
-                //console.log("NEW POS X: " + posX);
-                //console.log("NEW POS Y: " + posY);
-                
                 obstaclesCount++;
                 
                 for(var k = obstaclesCount - 1; k < obstaclesCount; k++) {
@@ -94,9 +97,6 @@ function obstaclesArrayCreation() {
 
 //Draw everything
 var render = function () {
-    
-    //console.log("MAP IS UPDATED!!!!!!!!!!!!!!!!!!!");
-    
     var posX = 0;
     var posY = 0;
     
@@ -120,14 +120,12 @@ var render = function () {
         }
     }
 
-    if(trollReady) {
-        context.drawImage(trollImage, enemy.locationX, enemy.locationY, 32, 32);
-        //console.log("Enemy Location X: " + enemy.locationX);
-        //console.log("Enemy Location Y: " + enemy.locationY);
+    if(trollReady && redDragonReady) {       
+        for(var i = 0; i < enemiesArray.length; i++) {
+            context.drawImage(enemiesArray[i].image, enemiesArray[i].locationXY[0,0], enemiesArray[i].locationXY[0,1], 32, 32);
+        }
     }
     if(playerReady) {
         context.drawImage(playerImage, player.locationX, player.locationY, 32, 32);
-        //console.log("Player Location X: " + player.locationX);
-        //console.log("Player Location Y: " + player.locationY);
     }
 }

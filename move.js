@@ -36,50 +36,26 @@ var playerWearables = {
 }
 
 var enemy = {
-    name: 'Troll',
-    level: 1,
-    xp: 10,
-    hp: 15,
-    baseHp: 15,
-    strength: 3,
-    defence: 1,
+    name: '',
+    level: 0,
+    xp: 0,
+    hp: 0,
+    baseHp: 0,
+    strength: 0,
+    defence: 0,
     damage: 0,
     locationX: 0,
-    locationY: 0
-}   
-
-var nextLvl = 10;
-var SPRITE_SIZE = 31;
-
-function generateEnemyLocation() {
-    enemy.locationX = Math.floor(Math.random() * 11) * 32;
-    enemy.locationY = Math.floor(Math.random() * 11) * 32;
-    
-    while(obsticklesBlockedMove() == true) {//(blockedMoveX() == true && blockedMoveY() == true) {
-        enemy.locationX = Math.floor(Math.random() * 11) * 32;
-        enemy.locationY = Math.floor(Math.random() * 11) * 32;
-    }
-    render();
+    locationY: 0,
+    arrayPosition: 0
 }
 
-function obsticklesBlockedMove() {
-     for(var i = 0; i < obstaclesArray.length; i++) {
-            if(
-                enemy.locationX == (obstaclesArray[i][0])
-                && enemy.locationY == (obstaclesArray[i][1])
-            ) {
-                return true;
-                break;
-            }
-    }
-    return false;
-}     
+var nextLvl = 10;
+var SPRITE_SIZE = 31;   
 
 function init() {
     playerStats();
     playerStatsRemove();
     messagePlayerLocation();
-    messageEnemyLocation();
 }
 
 function messagePlayerLocation() {
@@ -106,7 +82,7 @@ addEventListener("keyup", function(e) {
 }, false);
 
 
-// Update game objects
+//Update game objects
 var update = function (modifier) {
 	if (38 in keysDown) { // Player holding up
 		player.locationY -= player.speed * modifier;
@@ -150,7 +126,6 @@ var update = function (modifier) {
 var then = Date.now();
 
 var main = function() {
-
     var now = Date.now();
     var delta = now - then;
     
@@ -159,20 +134,24 @@ var main = function() {
     //console.log("DELTA: " + delta);
     
     then = now;
-    
     requestAnimationFrame(main);
 }
 
 function collision() {
-    if(
-        player.locationX <= (enemy.locationX + 32)
-        && enemy.locationX <= (player.locationX + 32)
-        && player.locationY <= (enemy.locationY + 32)
-        && enemy.locationY <= (player.locationY + 32)
-    ) {
-        document.getElementById("submitButton").style.visibility = "visible";
-        fight();
-        return true;
+    for(var i = 0; i < enemiesArray.length; i++) {
+        if(
+            player.locationX <= (enemiesArray[i].locationXY[0,0] + 32)
+            && enemiesArray[i].locationXY[0,0] <= (player.locationX + 32)
+            && player.locationY <= (enemiesArray[i].locationXY[0,1] + 32)
+            && enemiesArray[i].locationXY[0,1] <= (player.locationY + 32)
+        ) {
+            enemiesArray[i].attack = true;
+            document.getElementById("submitButton").style.visibility = "visible";
+            setEnemy();
+            messageEnemyLocation();
+            fight();
+            return true;
+        }  
     }
 }
 
@@ -191,7 +170,25 @@ function blockedMove() {
     }
 }
 
-function fight() {   
+function setEnemy() {
+    for(var i = 0; i < enemiesArray.length; i++) {
+        if(enemiesArray[i].attack) {
+            enemy.name = enemiesArray[i].name;
+            enemy.level = enemiesArray[i].level;
+            enemy.xp = enemiesArray[i].xp;
+            enemy.hp = enemiesArray[i].hp;
+            enemy.baseHp = enemiesArray[i].baseHp;
+            enemy.strength = enemiesArray[i].strength;
+            enemy.defence = enemiesArray[i].defence;
+            enemy.damage = enemiesArray[i].damage;
+            enemy.locationX = enemiesArray[i].locationXY[0,0];
+            enemy.locationY = enemiesArray[i].locationXY[0,1];
+            enemy.arrayPosition = i;
+        }
+    }
+}
+
+function fight() {
     player.damage = Math.floor(Math.random() * (player.strength + playerWearables.strengthBoost) + 1);
     player.magicDamage = Math.floor(Math.random() * 7);
     enemy.damage = Math.floor(Math.random() * enemy.strength +1);
@@ -228,7 +225,7 @@ function fight() {
 }
 
 function att() {
-    if((player.baseHp > 0) || (enemy.baseHp > 0)){                              
+    if((player.baseHp > 0) || (this.enemy.baseHp > 0)){                              
         playerStats();
         enemyStats();
     
@@ -262,11 +259,9 @@ function levelUp() {
 function enemyDead() {
     alert(enemy.name + " is killed.");
     player.xp = player.xp + enemy.xp;
-    generateEnemyLocation();
+    enemiesArray.splice(enemy.arrayPosition,1);
     render();
-    enemy.baseHp = enemy.hp;
     enemyStatsRemove();
-    messageEnemyLocation();
     levelUp(); 
 }
 

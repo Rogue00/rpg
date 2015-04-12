@@ -3,27 +3,21 @@
 //Better defence formula;
 //Save player detals in database;
 //Implement spell reuse timer and changing images (v0.1 two different images: a)usable; b) not usable );
-//Rewrite Enemy Object to Constructors;
 //Generate random damage for each attck
 //Implement who will attack first (sprite with higher speed will attack first)
 //Make sure that enemy doesn't appear in the same location as player
 //Implement random item location
 //Implement enemy drops
-//Implement images for enemies
 //Implement images for drops
 //Spells using Mana
-//Clean code
 //Swap wearable item
-//Implement player wears
+//Improve player wears
 //Use items from Invetory
-//Equipping wearable from inventiry
+//Improve: equipping wearable from inventiry
 //Equiptment - only start event listener when wearable is worn
 //Check is same item is allready worn
-//Map - BUG: Canvas - check when all images are loaded (onload)
-//Fix enemy coalitions
-// Map - Add obsticals
 // Map - Add items
-
+//Bug: enemies must not appear on player or other enemies
 
 #--=== Done ===--
 1. 08/02/2015 - Location - enemy random location function fix (Issue: random location could only be generated once);
@@ -58,10 +52,8 @@
 30. 04/04/2015 - Map - obstacles created and user can't move through them;
 31. 04/04/2015 - Map - user can't move through the enemy;
 32. 06/04/2015 - Map - enemy will not appear on obstacles;
+33. 11/04/2015 - Map - enemiesArray created;
 
 
 #--=== Working now ===--
-16/03/2015
-//?Create an enemy array for canvas map (http://www.youtube.com/watch?v=rqEJ7WiLWdo)
-
 

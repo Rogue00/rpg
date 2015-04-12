@@ -51,4 +51,5 @@ function enemyStatsRemove() {
     document.getElementById("enemyStrength").innerHTML = "";
     document.getElementById("enemyDefence").innerHTML = "";
     document.getElementById("enemyDamage").innerHTML = "";
+    document.getElementById("messageEnemyLocation").innerHTML = "";
 }
